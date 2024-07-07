@@ -1,4 +1,5 @@
 # records/models.py
+
 from django.db import models
 from django.utils import timezone
 
@@ -31,10 +32,16 @@ class Activity(models.Model):
         self.color = self.COLOR_CHOICES.get(self.activity_type, '#FFFFFF')
         super().save(*args, **kwargs)
 
-    def duration(self):
+    def duration_minutes(self):
         if self.end_time:
-            return self.end_time - self.start_time
-        return timezone.now() - self.start_time
+            duration = self.end_time - self.start_time
+        else:
+            duration = timezone.now() - self.start_time
+        return duration.total_seconds() / 60  # duration in minutes
+
+    def scaled_duration(self, scale=2, min_height=20):
+        scaled_height = self.duration_minutes() / scale
+        return max(scaled_height, min_height)
 
     def __str__(self):
         return self.name
