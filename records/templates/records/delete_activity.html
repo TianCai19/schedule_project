@@ -1,0 +1,42 @@
+<!-- records/templates/records/delete_activity.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Activity 删除活动</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .confirmation {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e53935;
+        }
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+        a:hover {
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delete Activity 删除活动</h1>
+    <p>Are you sure you want to delete this activity?</p>
+    <p>{{ activity.name }}: {{ activity.start_time }} - {{ activity.end_time }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+    </form>
+    <a href="{% url 'index' %}">No, go back</a>
+</body>
+</html>

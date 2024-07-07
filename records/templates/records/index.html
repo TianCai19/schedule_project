@@ -32,7 +32,7 @@
             <th>Start Time 开始时间</th>
             <th>End Time 结束时间</th>
             <th>Duration 期间</th>
-            <th>Color 颜色</th>
+            <th>Actions 操作</th>
         </tr>
         {% for activity in activities %}
         <tr style="background-color: {{ activity.color }}; height: {{ activity.scaled_duration }}px;">
@@ -40,7 +40,10 @@
             <td>{{ activity.start_time }}</td>
             <td>{{ activity.end_time }}</td>
             <td>{{ activity.duration_minutes }} minutes</td>
-            <td>{{ activity.color }}</td>
+            <td>
+                <a href="{% url 'update_activity' activity.pk %}">Edit 编辑</a>
+                <a href="{% url 'delete_activity' activity.pk %}">Delete 删除</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
