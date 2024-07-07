@@ -1,0 +1,55 @@
+<!-- records/templates/records/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Schedule 我的日程表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .record-row {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Schedule 我的日程表</h1>
+    <table>
+        <tr>
+            <th>Name 姓名</th>
+            <th>Start Time 开始时间</th>
+            <th>End Time 结束时间</th>
+            <th>Duration 期间</th>
+            <th>Activity Type 活动类型</th>
+        </tr>
+        {% for activity in activities %}
+        <tr class="record-row" style="background-color: {{ activity.color }}">
+            <td>{{ activity.name }}</td>
+            <td>{{ activity.start_time }}</td>
+            <td>{{ activity.end_time }}</td>
+            <td>{{ activity.duration }}</td>
+            <td>{{ activity.get_activity_type_display }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_activity' %}">Add Activity 添加活动</a>
+</body>
+</html>
